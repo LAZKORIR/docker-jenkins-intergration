@@ -6,7 +6,7 @@ pipeline {
    stages {
       stage ('Build Docker Image'){
          steps {
-            bat "docker build . -t lazaruskorir95/docker-jenkins-intergration:${DOCKER_TAG} "
+            bat "docker build -t lazaruskorir95/docker-jenkins-intergration:${DOCKER_TAG}  ."
          }
       }
 
