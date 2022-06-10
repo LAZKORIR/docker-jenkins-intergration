@@ -6,7 +6,7 @@ pipeline {
    stages {
       stage ('Build Docker Image'){
          steps {
-            bat "docker build . -t lazaruskorir95/docker-jenkins-intergration:${DOCKER_TAG}"
+            sh "docker build . -t lazaruskorir95/docker-jenkins-intergration:${DOCKER_TAG}"
          }
       }
 
@@ -15,6 +15,6 @@ pipeline {
 }
 
 def getDockerTag () {
-     def tag = bat  script: 'git rev-parse HEAD', returnStdout: true
+     def tag = sh  script: 'git rev-parse HEAD', returnStdout: true
      return tag;
 }
