@@ -1,3 +1,4 @@
+currentBuild.displayName= "docker-jenkins-intergration-#"+currentBuild.number
 pipeline {
    agent any
    environment{
