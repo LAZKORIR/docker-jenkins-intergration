@@ -4,6 +4,11 @@ pipeline {
        DOCKER_TAG = getDockerTag()
    }
    stages {
+      stage ('Build Jar file'){
+          steps {
+               sh "mvn clean package"
+            }
+         }
       stage ('Build Docker Image'){
          steps {
             sh "docker build  . -t lazaruskorir95/docker-jenkins-intergration:${DOCKER_TAG}"
