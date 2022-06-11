@@ -16,6 +16,16 @@ pipeline {
          }
       }
 
+       stage ('Push to Registry'){
+          steps {
+          withCredentials([string(credentialsId: 'docker-hub', variable: 'dockerHubPWD')]) {
+              sh "docker login -u lazaruskorir95 -p ${dockerHubPWD}"
+              sh "docker push lazaruskorir95/docker-jenkins-intergration:${DOCKER_TAG}"
+                 }
+
+              }
+           }
+
    }
 
 }
