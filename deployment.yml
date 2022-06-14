@@ -1,0 +1,44 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: docker-jenkins-intergration
+  name: docker-jenkins-intergration-deployment
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: docker-jenkins-intergration
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: docker-jenkins-intergration
+    spec:
+      restartPolicy: Always
+      imagePullSecrets:
+        - name: harbor-secret
+      containers:
+        - name: docker-jenkins-intergration
+          image:  lazaruskorir95/docker-jenkins-intergration:0e25335f267bf1b8d7e768dd4a8c263f8b44e4ea
+          ports:
+            - containerPort: 8080
+          imagePullPolicy: IfNotPresent
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: docker-jenkins-intergration-service
+  namespace: default
+  labels:
+    run: docker-jenkins-intergration-service
+spec:
+  type: NodePort
+  ports:
+    - name: docker-jenkins-intergration-port
+      port: 8080
+      targetPort: 8080
+      protocol: TCP
+  selector:
+    app: docker-jenkins-intergration
