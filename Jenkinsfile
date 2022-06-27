@@ -12,7 +12,7 @@ pipeline {
          }
       stage ('Build Docker Image'){
          steps {
-            sh "docker build  . -t lazaruskorir95/docker-jenkins-intergration:${DOCKER_TAG}"
+            sh "docker build  . -t  lazaruskorir95/docker-jenkins-intergration:${DOCKER_TAG}"
          }
       }
 
