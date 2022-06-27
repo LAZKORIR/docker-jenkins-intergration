@@ -19,23 +19,23 @@ pipeline {
        stage ('Push to Registry'){
           steps {
           withCredentials([string(credentialsId: 'docker-hub', variable: 'dockerHubPWD')]) {
-              sh "docker login -u lazaruskorir95 -p ${dockerHubPWD}"
-              sh "docker push lazaruskorir95/docker-jenkins-intergration:${DOCKER_TAG}"
-                 }
+             sh "docker login -u lazaruskorir95 -p ${dockerHubPWD}"
+             sh "docker push lazaruskorir95/docker-jenkins-intergration:${DOCKER_TAG}"
+                }
 
               }
            }
 
-            stage ('Deploy to Kubernetes'){
-                     steps {
-                         sh  kubernetesDeploy (configs: "deployment.yml", kubeconfigId: "kubernetes")
-                         }
-                      }
+//             stage ('Deploy to Kubernetes'){
+//                      steps {
+//                          sh  kubernetesDeploy (configs: "deployment.yml", kubeconfigId: "kubernetes")
+//                          }
+//                       }
    }
 
 }
 
 def getDockerTag () {
-     def tag = sh  script: 'git rev-parse HEAD', returnStdout: true
+     def tag = sh  script: 'git rev-parse --short=8 HEAD', returnStdout: true
      return tag;
 }
