@@ -1,4 +1,4 @@
-currentBuild.displayName= "docker-jenkins-intergration-#"+currentBuild.number
+currentBuild.displayName= "docker-jenkins-integration-#"+currentBuild.number
 pipeline {
    agent any
    environment{
@@ -12,7 +12,7 @@ pipeline {
          }
       stage ('Build Docker Image'){
          steps {
-            sh "docker build  . -t  lazaruskorir95/docker-jenkins-intergration:${DOCKER_TAG}"
+            sh "docker build  . -t  lazaruskorir95/docker-jenkins-integration:${DOCKER_TAG}"
          }
       }
 
@@ -20,7 +20,7 @@ pipeline {
           steps {
           withCredentials([string(credentialsId: 'docker-hub', variable: 'dockerHubPWD')]) {
              sh "docker login -u lazaruskorir95 -p ${dockerHubPWD}"
-             sh "docker push lazaruskorir95/docker-jenkins-intergration:${DOCKER_TAG}"
+             sh "docker push lazaruskorir95/docker-jenkins-integration:${DOCKER_TAG}"
                 }
 
               }
