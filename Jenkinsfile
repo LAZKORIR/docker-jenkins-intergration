@@ -1,6 +1,10 @@
 currentBuild.displayName= "docker-jenkins-integration-#"+currentBuild.number
 pipeline {
    agent any
+   tools {
+         maven 'MAVEN_HOME'
+         jdk 'JAVA_HOME'
+       }
    environment{
        DOCKER_TAG = getDockerTag()
    }
